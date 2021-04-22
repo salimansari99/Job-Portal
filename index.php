@@ -1,5 +1,4 @@
 <?php include 'header.php'?>
-
 <div class="content">
 <p>
   <!-- <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
@@ -11,28 +10,28 @@
 </p>
 <div class="collapse" id="collapseExample">
   <div class="card card-body">
-  <form action="">
+  <form action="" method="POST">
   <div class="mb-3">
     <label for="Company Name" class="form-label">Company Name</label>
-    <input type="text" class="form-control" id="" >
+    <input type="text" class="form-control" id="" name="cname">
   </div>
   <div class="mb-3">
     <label for="exampleInputPosition" class="form-label">Position</label>
-    <input type="text" class="form-control" id="exampleInputPosition">
+    <input type="text" class="form-control" id="exampleInputPosition" name="pos">
   </div>
   <div class="mb-3">
     <label for="JobDesc" class="form-label">Job Description</label>
-    <textarea name="" id="" cols="30" rows="10" class="form-control"></textarea>
+    <textarea  id="" cols="30" rows="10" class="form-control" name="Jdesc"></textarea>
   </div>
   <div class="mb-3">
     <label for="Skills" class="form-label">Skills Required</label>
-    <input type="text" class="form-control" id="skills">
+    <input type="text" class="form-control" id="skills" name="skills">
   </div>
   <div class="mb-3">
     <label for="CTC" class="form-label">CTC</label>
-    <input type="text" class="form-control" id="CTC">
+    <input type="text" class="form-control" id="CTC" name="CTC">
   </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary" name="job">Submit</button>
 </form>
 </div>
 </div>
@@ -45,19 +44,25 @@
       <th scope="col">CTC</th>
     </tr>
   </thead>
+  <?php  $sql="SELECT  `cname`, `position`, `CTC` FROM `jobs`";
+  $result = mysqli_query($conn,$sql);
+  $i=0;
+if ($result->num_rows > 0) {
+  
+  // output data of each row
+  while($row = $result->fetch_assoc()) {
+    echo"
   <tbody>
     <tr>
-      <th scope="row">1</th>
-      <td>TCS</td>
-      <td>Software Developer</td>
-      <td>8LPA</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Google</td>
-      <td>Digital Marketing</td>
-      <td>12LPA</td>
-    </tr>
+      <td>".++$i."</td>
+      <td>".$row['cname']."</td>
+      <td>".$row['position']."</td>
+      <td>".$row['CTC']."</td>
+    </tr>";
+  }}
+  else{
+    echo"";
+  }?>
   </tbody>
 </table>
 </div>
